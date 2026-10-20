@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Probability Poker · lunarcit0’s Game Room</title><meta name="description" content="Play five-card draw and explore probability without replacement."><link rel="stylesheet" href="style.css?v=compact-table-1"><link rel="stylesheet" href="poker.css?v=1"></head>
+<body class="subject-page poker-page"><header><a href="index.html" class="brand"><img class="brand-cat" src="assets/louis-wain-cat.jpg" width="42" height="55" alt="Cat artwork by Louis Wain"> lunarcit0’s Game Room</a></header><div class="page-heading"><a href="index.html">← All games</a><h1>Probability Poker</h1><p>A quiet table. Five cards. A little uncertainty.</p></div>
+<main class="poker-layout">
+<section class="poker-room" aria-label="Five-card draw table">
+ <div class="poker-topbar"><span>FIVE-CARD DRAW</span><span id="poker-round">Hand 1</span></div>
+ <div class="poker-scene">
+  <div class="cafe-window" aria-hidden="true"><i></i></div><div class="cafe-lamp" aria-hidden="true"></div>
+  <div class="poker-opponent">
+   <svg viewBox="0 0 240 190" aria-hidden="true" shape-rendering="crispEdges"><path fill="#523b39" d="M79 11h76v9h14v21h9v112H65V50h5V29h9z"/><path fill="#d6a489" d="M90 32h58v16h8v49h-12v15h-17v14h-20v-20H91V94h-9V50h8z"/><path fill="#3f3032" d="M80 31h19v15h-9v17H77zM99 24h50v12h13v32h-14V45h-13V33H99z"/><path fill="#46333a" d="M96 64h8v5h-8zM133 64h8v5h-8z"/><path fill="#ad6c72" d="M110 88h18v4h-18z"/><path fill="#9b665f" d="M90 76h7v5h-7z"/><path fill="#c596a5" d="M90 115h20v9h20v-9h17l27 16 12 59H51l14-58z"/><path fill="#e5c7c8" d="m94 115 24 22 26-22-9 33h-33z"/><path fill="#74535c" d="M71 37h15v106H71zM151 37h16v110h-16z"/><path fill="#d6a489" d="M69 161h26v17H65zM145 161h25l5 17h-29z"/><path fill="#b98292" d="M62 145h22v17H59zM157 145h21v17h-21z"/></svg>
+   <div class="opponent-label">Opponent <span id="opponent-rank"></span></div>
+  </div>
+  <div class="poker-felt"><div class="felt-stitch" aria-hidden="true"></div>
+   <div id="opponent-hand" class="poker-hand opponent-hand" aria-label="Opponent’s hand"></div>
+   <div class="poker-center"><div class="draw-stack" aria-label="Draw pile"><div class="card-back poker-back">♠</div><span id="deck-count">42 cards</span></div><div class="table-message"><span class="table-monogram" aria-hidden="true">♠ ♥ ♣ ♦</span><p id="table-status" role="status" aria-live="polite"></p></div><div class="discard-stack"><div id="discard-image"></div><span id="discard-count">Discards · 0</span></div></div>
+   <div class="your-seat"><div class="your-label">Your hand <strong id="your-rank"></strong></div><div id="player-hand" class="poker-hand player-hand" aria-label="Your cards; select cards to replace"></div><div class="holding-hands" aria-hidden="true"><i></i><i></i></div></div>
+  </div>
+ </div>
+ <div class="poker-actions"><p id="selection-status">Select up to 3 cards to replace.</p><div><button id="exchange">Keep all & reveal</button><button id="next-hand" hidden>Next hand →</button></div></div>
+ <p class="session-results" id="session-results">You 0 · Opponent 0 · Ties 0</p>
+</section>
+<aside class="poker-study">
+ <section class="probability-card"><span class="eyebrow">BEFORE YOU DRAW</span><h2>What are the odds?</h2><p>Try a question about your opening hand. Practice is optional.</p><p id="opening-cards" class="opening-cards"></p>
+ <label for="poker-event">Count cards that are…</label><select id="poker-event"><option value="h">Hearts ♥</option><option value="d">Diamonds ♦</option><option value="c">Clubs ♣</option><option value="s">Spades ♠</option><option value="ace">Aces</option><option value="face">Face cards (J, Q, K)</option></select>
+ <label for="poker-kind">Question</label><select id="poker-kind"><option value="atleast">At least one</option><option value="exactly">Exactly one</option></select>
+ <p id="odds-question" class="odds-question"></p><form id="odds-form"><label for="odds-answer">Fraction, decimal, or percentage</label><div class="odds-answer-row"><input id="odds-answer" type="text" inputmode="text" autocomplete="off" placeholder="e.g. 1/4 or 25%"><button>Check</button></div></form><button id="odds-reveal" class="secondary">Show explanation</button><div id="odds-feedback" role="status" aria-live="polite"></div>
+ <p class="knowledge-note">Only your opening five cards are known. The opponent’s cards stay unknown, so the sample space has 47 unseen cards. Discards are not returned to the deck.</p>
+ </section>
+ <details class="poker-guide"><summary>How to play</summary><p>Each hand uses a freshly shuffled 52-card deck with no jokers. You and the opponent receive five cards each. Click up to three of yours, then draw replacements—or keep all five. The opponent makes one exchange too. The stronger final hand wins.</p><p>This table uses a maximum of three replacements. There is no betting or money. Each hand is independent, and session counts reset when you leave.</p><p>The opponent keeps made straights and flushes, keeps matching ranks, tries four-card flushes or straights, and otherwise keeps its two highest cards. It only considers its own cards.</p><p>Probability questions refer to your draw before the opponent exchanges. Selecting no replacements makes the question a hypothetical one-card draw.</p></details>
+ <details class="poker-guide"><summary>Hand rankings & ties</summary><ol><li>Straight flush (royal flush is the highest)</li><li>Four of a kind</li><li>Full house</li><li>Flush</li><li>Straight</li><li>Three of a kind</li><li>Two pair</li><li>One pair</li><li>High card</li></ol><p>Higher ranks and then kickers break ties. Suits have equal value. An ace is high except in A–2–3–4–5, where the straight is five-high.</p></details>
+</aside></main>
+<footer>Traditional card artwork by Chris Aguilar; Ace of Spades by Byron Knoll. Optimized by Mike Hall and Warren Lockhart.<br><a href="https://github.com/younestouati/playing-cards-standard-deck" target="_blank" rel="noopener">Card source</a> · <a href="assets/poker/LICENSE.txt">LGPL 3.0</a> · lunarcit0’s Game Room</footer>
+<script src="poker-engine.js?v=1"></script><script src="poker.js?v=1"></script></body></html>

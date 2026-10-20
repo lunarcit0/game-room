@@ -1,0 +1,9 @@
+
+'use strict';
+(()=>{const frame=document.getElementById('dukiie-frame'),buttons=[...document.querySelectorAll('[data-key]')],held=new Map(),keys={KeyA:['a',65],KeyD:['d',68],KeyS:['s',83],KeyW:['w',87],KeyZ:['z',90],KeyX:['x',88]};
+function send(code,type){const win=frame.contentWindow,canvas=win?.document.getElementById('canvas');if(!canvas)return;canvas.focus({preventScroll:true});const [key,num]=keys[code];canvas.dispatchEvent(new win.KeyboardEvent(type,{key,code,keyCode:num,which:num,bubbles:true,cancelable:true}));}
+function release(id){const b=held.get(id);if(!b)return;held.delete(id);if(![...held.values()].includes(b)){send(b.dataset.key,'keyup');b.classList.remove('held');}}
+for(const b of buttons){b.addEventListener('pointerdown',e=>{e.preventDefault();if(held.has(e.pointerId))return;b.setPointerCapture(e.pointerId);const first=![...held.values()].includes(b);held.set(e.pointerId,b);b.classList.add('held');if(first)send(b.dataset.key,'keydown');document.getElementById('dukiie-control-status').textContent=b.getAttribute('aria-label')||b.textContent;});for(const event of ['pointerup','pointercancel','lostpointercapture'])b.addEventListener(event,e=>release(e.pointerId));b.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&!e.repeat){e.preventDefault();send(b.dataset.key,'keydown');}});b.addEventListener('keyup',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();send(b.dataset.key,'keyup');}});}
+function releaseAll(){for(const id of [...held.keys()])release(id);}
+frame.addEventListener('load',()=>{const notice=frame.contentWindow?.document.getElementById('status-notice');if(notice?.textContent.trim())document.getElementById('dukiie-control-status').textContent=notice.textContent.trim();});window.addEventListener('pagehide',releaseAll);document.addEventListener('visibilitychange',()=>{if(document.hidden)releaseAll();});
+})();
